@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+}
+#layout-main{
+    background: lightgoldenrodyellow;
+    margin-left: 1%;
+    height: 80%;
+    overflow: auto;
+}
+#feed-posts{
+    display: inline-block;
+    width: 50%;
+}
+#user-friends{
+    display: inline-block;
+    width: 12%;
+    height: 120%;
+    vertical-align: top;
+    margin-left: 33%;
+    border-left: 2px dashed black;
+    padding-left: 10px;
+}
+#layout-footer{
+    background: lightblue;
+}
+#footer-nav div div{
+    display: inline-block;
+}
+#posts-list-container{
+    margin: 5%;
+    display: grid;
+    grid-auto-flow: row;
+    grid-row-gap: 20px;
+}
+#user-friends a{
+    text-decoration: none;
+}
+
+    

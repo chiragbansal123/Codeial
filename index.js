@@ -1,23 +1,37 @@
 const express = require('express');
+const env = require('./config/environment');
+const logger = require('morgan');
+
 const cookieParser = require('cookie-parser');
+
 const app = express();
-const port = 8000;
+require('./config/view-helpers')(app);
+
+const port = process.env.port||8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 // used for session cookie
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const googlepassport=require('./config/passport-google-oauth-2-strategy');
 const MongoStore = require('connect-mongo')(session);
 const flash=require('connect-flash');
 const customMware = require('./config/middleware');
+const environment = require('./config/environment');
 
+const chatServer=require('http').Server(app);
+const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log(`chat server is listening on port${port}`);
 
 app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
+app.use('/uploads',express.static(__dirname + '/uploads'));
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
@@ -35,7 +49,7 @@ app.set('views', './views');
 app.use(session({
     name: 'codeial',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -45,7 +59,6 @@ app.use(session({
         {
             mongooseConnection: db,
             autoRemove: 'disabled'
-        
         },
         function(err){
             console.log(err ||  'connect-mongodb setup ok');

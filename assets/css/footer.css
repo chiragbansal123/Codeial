@@ -1,0 +1,13 @@
+.footer-nav div div{
+    display: inline-block;
+    padding-left: 2%;
+}
+/* .footer-nav div{
+    background: lightblue;
+} */
+.footer-nav div div a{
+    text-decoration: none;
+}
+#layout-footer{
+    background: lightblue;
+}

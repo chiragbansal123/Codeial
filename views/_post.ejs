@@ -1,15 +1,27 @@
-<li>
+<link rel="stylesheet" href="/css/post.css">
+<div id="showing-posts">
         <p>
             <% if (locals.user && locals.user.id == post.user.id){ %>
             <small>
                 <a href="/posts/destroy/<%= post.id %>">X</a>
             </small>
             <% } %>
-            <%= post.content %>
+            <%= post.user.name %>
+
             <br>
-            <small>
-                <%= post.user.name %>
-            </small>
+            <p>
+                <%= post.content %>
+            </p>
+            
+            <p>
+                <% if(locals.user){%>
+                    <a id = "like-dislike-toggle" class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                        <%= post.likes.length %> Likes
+                   </a>
+                <%}else{%>
+                    <%=post.likes.length %>Likes
+                <%} %>
+                </p>
         </p>
         <div class="post-comments">
             <% if (locals.user){ %>
@@ -33,4 +45,4 @@
             </div>
         </div>
         
-    </li>
+    </div>
