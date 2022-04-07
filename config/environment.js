@@ -64,5 +64,4 @@ const production =  {
     }
 }
 
-module.exports=development;
-// module.exports=eval(process.env.CODEIAL_ENVIRONMENT) == production ? production:development;
+module.exports=production;

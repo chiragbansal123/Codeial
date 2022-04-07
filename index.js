@@ -10,7 +10,9 @@ require('./config/view-helpers')(app);
 const port = process.env.port||8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+
 // used for session cookie
+
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
@@ -18,7 +20,6 @@ const googlepassport=require('./config/passport-google-oauth-2-strategy');
 const MongoStore = require('connect-mongo')(session);
 const flash=require('connect-flash');
 const customMware = require('./config/middleware');
-const environment = require('./config/environment');
 
 const chatServer=require('http').Server(app);
 const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
