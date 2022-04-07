@@ -31,7 +31,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use(express.static(env.asset_path));
-app.use('/uploads',express.static(__dirname + '/uploads'));
+app.use('./uploads',express.static(__dirname + '/uploads'));
 app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.use(expressLayouts);
